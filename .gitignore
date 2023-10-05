@@ -4,3 +4,8 @@ dist/
 package-lock.json
 yarn.lock
 public/site.json
+public/CNAME
+public/**/*.json
+public/**/*.txt
+public/**/*.html
+public/assets

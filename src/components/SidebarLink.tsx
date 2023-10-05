@@ -1,5 +1,6 @@
 import { Component } from "preact";
 import { SiteLink } from "../types";
+import Link from "./Link";
 
 interface SidebarLinkProps {
     label: string;
@@ -14,12 +15,12 @@ export default class SidebarLink extends Component<SidebarLinkProps> {
         const { label, path, description, links } = this.props;
 
         return <div class='sidebar-link'>
-            <a href={path}>{label}</a>
+            <Link href={path}>{label}</Link>
             {description && <div class='sidebar-kick'>{description}</div>}
             {links && <div class='sidebar-links'>
                 {links.map(link => {
                     return <>
-                        <a href={link.path}>{link.label}</a>
+                        <Link href={link.path}>{link.label}</Link>
                         {link.description && <div class='link-desc'>{link.description}</div>}
                     </>
                 })}

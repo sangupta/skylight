@@ -2,26 +2,31 @@
   "name": "@sangupta/skylight",
   "version": "0.1.0",
   "description": "SPA for my website sangupta.com",
-  "dependencies": {
-    "preact": "^10.17.1"
-  },
-  "devDependencies": {
-    "@parcel/transformer-sass": "2.9.3",
-    "parcel": "^2.9.3",
-    "typescript": "^5.2.2"
-  },
-  "scripts": {
-    "watch": "parcel serve index.html public/** --no-cache",
-    "build": "parcel build index.html",
-    "tsc": "tsc --noEmit"
-  },
+  "source": "index.html",
   "author": {
     "name": "Sandeep Gupta",
     "email": "sandy.pec@gmail.com",
     "url": "https://sangupta.com"
   },
   "license": "ISC",
+  "dependencies": {
+    "preact": "^10.17.1"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "2.9.3",
+    "parcel": "^2.9.3",
+    "typescript": "^5.2.2",
+    "parcel-reporter-static-files-copy": "^1.5.3"
+  },
+  "scripts": {
+    "watch": "parcel serve index.html --no-cache",
+    "build": "parcel build index.html",
+    "tsc": "tsc --noEmit"
+  },
   "alias": {
     "preact/jsx-dev-runtime": "preact/jsx-runtime"
+  },
+  "staticFiles": {
+    "staticPath": "public"
   }
 }

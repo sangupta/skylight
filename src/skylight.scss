@@ -1,7 +1,7 @@
 $headerHeight: 49px;
 $borderColor: #ddd;
 $backgroundColor: #f5f5f5;
-$sidebarWidth: 199px;
+$sidebarWidth: 179px;
 $myBlue: rgb(65, 132, 243);
 $textColor: rgb(31, 35, 40);
 
@@ -100,6 +100,7 @@ aside.sidebar {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    margin-top: 20px;
 
     gap: 20px;
 }
@@ -148,4 +149,28 @@ footer {
     .heart {
         color: red;
     }
+}
+
+.header-links {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 0 20px;
+
+    align-items: center;
+    justify-content: space-between;
+
+    .left,
+    .right {
+        a {
+            padding: 0 6px;
+            text-decoration: none;
+        }
+    }
+}
+
+.spacer {
+    padding: 0 4px;
+    font-size: 8px;
+    vertical-align: middle;
 }
