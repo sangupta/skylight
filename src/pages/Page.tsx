@@ -1,12 +1,15 @@
 import { Component } from "preact";
-import { PageContent, PropsWithSite, SitePage } from "../types";
+import { PageContent, PropsWithSite, Site, SitePage } from "../types";
 import Link from "../components/Link";
 import ReadingTime from "../components/ReadingTime";
 import PageCategory from "../components/PageCategory";
 import ReadableDate from "../components/ReadableDate";
+import resolveUrl from "../utils/resolveUrl";
+import PostContent from "../components/PostContent";
 
 interface PageProps extends PropsWithSite {
     page: SitePage;
+    summaryOnly?: boolean;
 }
 
 interface PageState {
@@ -22,7 +25,7 @@ export default class Page extends Component<PageProps, PageState> {
     }
 
     componentDidMount = async (): Promise<void> => {
-        const { page } = this.props;
+        const { page, site } = this.props;
         const { content, contentPath } = page;
         if (content) {
             return;
@@ -32,8 +35,9 @@ export default class Page extends Component<PageProps, PageState> {
             return;
         }
 
+        const url = resolveUrl(site.baseUrl, contentPath);
         try {
-            const response = await fetch(contentPath);
+            const response = await fetch(url);
             const json = await response.json();
             this.setState({ contentJson: json, loading: false });
         } catch (e: any) {
@@ -42,11 +46,11 @@ export default class Page extends Component<PageProps, PageState> {
     }
 
     renderContent = () => {
-        const { page } = this.props;
+        const { site, page, summaryOnly = false } = this.props;
         const { contentJson, loading, error } = this.state;
 
         if (page.content) {
-            return page.content;
+            return <PostContent key={page.id} content={page.content} />
         }
 
         if (loading) {
@@ -57,26 +61,27 @@ export default class Page extends Component<PageProps, PageState> {
             return <div class='alert alert-warning'>Unable to load page contents.</div>
         }
 
-        const value = atob(contentJson.data);
-        return value;
+        const value = contentJson.data;
+        return <PostContent key={page.id} content={value} summaryOnly={summaryOnly} />
     }
 
     render() {
-        const { page } = this.props;
+        const { page, summaryOnly = false } = this.props;
 
-        return <article class='page'>
-            <h1>
+        return <article class='post'>
+            <h1 class='post-title'>
                 <Link href={page.path}>{page.title}</Link>
             </h1>
-            <div class='page-metadata text-muted'>
-                <PageCategory page={page} />
-                <ReadingTime page={page} />
-                <ReadableDate class='published' date={page.date} />
-            </div>
-            <hr />
-            <div class='page-content'>
-                {this.renderContent()}
-            </div>
+            {!summaryOnly && <>
+                <div class='post-metadata text-muted'>
+                    <PageCategory page={page} />
+                    <ReadingTime page={page} />
+                    <ReadableDate class='published' date={page.date} />
+                </div>
+                <hr />
+            </>
+            }
+            {this.renderContent()}
         </article>
     }
 

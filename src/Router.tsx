@@ -6,6 +6,8 @@ import NotFound from "./pages/NotFound";
 import Page from "./pages/Page";
 import SiteHome from "./pages/SiteHome";
 import SectionHome from "./pages/SectionHome";
+import equalsIgnoreStartSlash from "./utils/equalsIgnoreStartSlash";
+import SectionArchive from "./pages/SectionArchive";
 
 interface RouterState {
     route?: string;
@@ -40,8 +42,8 @@ export default class Router extends Component<PropsWithSite> {
         const route = ce.detail.route;
 
         if (route !== this.state.route) {
-            window.history.pushState({}, '', ce.detail.route);
-            this.setState({ route: ce.detail.route });
+            window.history.pushState({}, '', route);
+            this.setState({ route });
         }
     }
 
@@ -51,7 +53,9 @@ export default class Router extends Component<PropsWithSite> {
 
         const cleanRoute = route.trim();
         const question = cleanRoute.indexOf('?');
-        const path = question > -1 ? cleanRoute.substring(0, question) : cleanRoute;
+        const path = question >= 0 ? cleanRoute.substring(0, question) : cleanRoute;
+
+        console.log('requesting page: ', path);
 
         const page = site.pages?.find(page => page.path === path);
         if (!page) {
@@ -61,9 +65,15 @@ export default class Router extends Component<PropsWithSite> {
             }
 
             // check if this is a blog home
-            const section = site.sections?.find(section => section.id === path);
+            const section = site.sections?.find(section => equalsIgnoreStartSlash(section.id, path));
             if (section) {
                 return <SectionHome site={site} section={section} />
+            }
+
+            // check if this is an archive page
+            const archiveSection = site.sections?.find(section => equalsIgnoreStartSlash(section.id + '/archive', path));
+            if(archiveSection) {
+                return <SectionArchive site={site} section={archiveSection} />
             }
 
             // nothing to do

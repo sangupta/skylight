@@ -1,13 +1,13 @@
 const iconMap: Record<string, string> = {
-    github: '/public/github.svg',
-    twitter: '/public/twitter.svg',
-    instagram: '/public/instagram.svg',
-    linkedin: '/public/linkedin.svg',
-    ycombinator: '/public/ycombinator.svg',
-    facebook: '/public/facebook.svg',
-    stackoverflow: '/public/stackoverflow.svg',
-    gitlab: '/public/gitlab.svg',
-    medium: '/public/medium.svg',
+    github: '/github.svg',
+    twitter: '/twitter.svg',
+    instagram: '/instagram.svg',
+    linkedin: '/linkedin.svg',
+    ycombinator: '/ycombinator.svg',
+    facebook: '/facebook.svg',
+    stackoverflow: '/stackoverflow.svg',
+    gitlab: '/gitlab.svg',
+    medium: '/medium.svg',
 }
 
 const SvgIcon = ({ type }: { type: string }) => {

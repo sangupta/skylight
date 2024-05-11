@@ -1,30 +1,30 @@
 import { Component } from "preact";
 import { PropsWithSite } from "../types";
-import sortPosts from "../utils/sortPosts";
 import Page from "./Page";
+import filterPages from "../utils/filterPages";
+import Pagination from "../components/Pagination";
 
 export default class SiteHome extends Component<PropsWithSite> {
 
     render() {
         const { site } = this.props;
-        const { pages, blogs } = site;
 
         // filter pages that are part of blogs
-        const filteredPages = pages?.filter(page => {
-            const blog = blogs?.find(blog => page.path.startsWith(blog.path));
-            return !!blog;
-        }) || [];
+        const filtered = filterPages(site?.pages, 'blog-post');
 
-        if (filteredPages.length === 0) {
-            return <h1>Welcome!</h1>
-        }
-
-        // sort them out
-        const sortedPages = sortPosts(filteredPages);
-
-        return sortedPages.map(page => {
-            return <Page page={page} site={site} />
+        const pages = filtered.pages.map(page => {
+            return <Page key={page.id} page={page} site={site} summaryOnly={true} />
         });
+
+        return <>
+            {pages}
+
+            <Pagination
+                current={filtered.currentPage}
+                total={filtered.totalPages}
+                path=''
+            />
+        </>
     }
 
 }

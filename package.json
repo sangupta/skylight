@@ -10,20 +10,29 @@
   },
   "license": "ISC",
   "dependencies": {
-    "preact": "^10.17.1"
+    "preact": "^10.20.2",
+    "marked": "^12.0.2",
+    "marked-highlight": "^2.1.1",
+    "highlight.js": "^11.9.0"
   },
   "devDependencies": {
-    "@parcel/transformer-sass": "2.9.3",
-    "parcel": "^2.9.3",
-    "typescript": "^5.2.2",
+    "@parcel/transformer-sass": "^2.12.0",
+    "@types/react": "^18.2.79",
+    "@types/react-dom": "^18.2.25",
+    "parcel": "^2.12.0",
+    "typescript": "^5.4.5",
     "parcel-reporter-static-files-copy": "^1.5.3"
   },
   "scripts": {
     "watch": "parcel serve index.html --no-cache",
-    "build": "parcel build index.html",
+    "build": "parcel build index.html --detailed-report --no-cache",
     "tsc": "tsc --noEmit"
   },
   "alias": {
+    "react": "preact/compat",
+    "react-dom/test-utils": "preact/test-utils",
+    "react-dom": "preact/compat",
+    "react/jsx-runtime": "preact/jsx-runtime",
     "preact/jsx-dev-runtime": "preact/jsx-runtime"
   },
   "staticFiles": {

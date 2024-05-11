@@ -2,6 +2,7 @@ import { Component } from 'preact';
 import { PropsWithSite, SiteLink, SiteSection, SocialLink } from './types';
 import SidebarLink from './components/SidebarLink';
 import SvgIcon from './components/SvgIcon';
+import Footer from './components/Footer';
 
 export default class Sidebar extends Component<PropsWithSite> {
 

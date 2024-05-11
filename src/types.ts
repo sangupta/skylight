@@ -1,7 +1,9 @@
 export interface Site {
+    title: string;
     baseUrl?: string;
     name?: string;
     icon?: string;
+    iconAlt?: string;
     sidebar: SiteSidebar;
     socials?: SocialLink[];
     header?: SiteHeader;
@@ -9,6 +11,13 @@ export interface Site {
     pages?: SitePage[];
     theme?: SiteTheme;
     sections: SiteSection[];
+    copyright?: CopyrightInfo;
+}
+
+export interface CopyrightInfo {
+    start?: number;
+    end?: number;
+    message?: string;
 }
 
 export interface SiteSection {
@@ -30,6 +39,8 @@ export interface SitePage {
     path: string;
     category?: string;
     description?: string;
+    pageType: string;
+    section: string;
     date: number;
     published?: boolean;
     tags: string[];
@@ -81,4 +92,18 @@ export interface SiteHeaderSide {
 export interface PageContent {
     type: string;
     data: string;
+}
+
+export const BLOG_POST = 'blogPost';
+export const PAGE = 'page';
+export const BOOK_PAGE = 'bookPage';
+export const LINK = 'link';
+export const UNKNOWN = 'unknown';
+
+export const PageType = {
+    BLOG_POST,
+    PAGE,
+    BOOK_PAGE,
+    LINK,
+    UNKNOWN
 }

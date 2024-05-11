@@ -1,9 +1,10 @@
 $headerHeight: 49px;
-$borderColor: #ddd;
+$borderColor: rgb(212, 212, 216);
 $backgroundColor: #f5f5f5;
 $sidebarWidth: 179px;
 $myBlue: rgb(65, 132, 243);
 $textColor: rgb(31, 35, 40);
+$secondaryTextColor: rgb(63, 63, 70);
 
 html,
 body {
@@ -173,4 +174,62 @@ footer {
     padding: 0 4px;
     font-size: 8px;
     vertical-align: middle;
+}
+
+.post {
+
+    padding-bottom: 80px;
+
+    hr {
+        border-top: 1px dashed;
+    }
+
+    .post-title {
+        font-size: 26px;
+        line-height: 40px;
+
+        a,
+        a:visited {
+            text-decoration: none;
+        }
+    }
+
+    .post-metadata {
+        font-style: italic;
+    }
+
+}
+
+pre {
+    background-color: darkslategrey;
+}
+
+.archive-tile {
+    display: flex;
+    flex-direction: row;
+    padding: 64px 0;
+
+    .metadata {
+        width: 25%;
+        border-right: 1px solid $borderColor;
+    }
+
+    .post-details {
+        flex: 1;
+        margin-left: 32px;
+    }
+}
+
+.tags {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .tag {
+        padding: 4px 8px;
+        margin: 4px;
+        border: 1px solid $borderColor;
+        color: $secondaryTextColor;
+        border-radius: 4px;
+    }
 }

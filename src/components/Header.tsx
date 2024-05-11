@@ -1,6 +1,7 @@
 import { Component } from "preact";
 import { PropsWithSite, Site, SiteLink } from "../types";
 import Link from "./Link";
+import resolveUrl from "../utils/resolveUrl";
 
 export default class Header extends Component<PropsWithSite> {
 
@@ -39,10 +40,12 @@ export default class Header extends Component<PropsWithSite> {
     render() {
         const { site } = this.props;
 
+        const logoUrl = resolveUrl(site.baseUrl, site.icon);
+
         return <header>
             <Link href='/' class='brand'>
-                <img class='brand-logo' src='/public/letter-s.jpg' alt='S' />
-                <span class='brand-name'>sangupta</span>
+                <img class='brand-logo' src={logoUrl} alt={site.iconAlt || ''} />
+                <span class='brand-name'>{site.title}</span>
             </Link>
             {this.renderHeaderLinks(site)}
         </header>

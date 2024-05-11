@@ -14,8 +14,10 @@ export default class SidebarLink extends Component<SidebarLinkProps> {
     render() {
         const { label, path, description, links } = this.props;
 
+        const href = path.startsWith('/') ? path : '/' + path;
+
         return <div class='sidebar-link'>
-            <Link href={path}>{label}</Link>
+            <Link href={href}>{label}</Link>
             {description && <div class='sidebar-kick'>{description}</div>}
             {links && <div class='sidebar-links'>
                 {links.map(link => {
